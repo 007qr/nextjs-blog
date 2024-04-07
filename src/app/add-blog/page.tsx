@@ -44,7 +44,8 @@ export default function AddBlog() {
                     imageURL,
                     content: data,
                     published: true,
-                    shortDesc
+                    shortDesc,
+                    createdAt: new Date()
                 })
                 toast({
                     title: "Post created successfully!"

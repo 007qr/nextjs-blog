@@ -15,10 +15,17 @@ export const slugify = (str: string) =>
 
 export interface Blog {
   id: string;
+  createdAt: string;
   title: string;
   shortDesc: string
   published: boolean;
   slug: string;
   imageURL: string;
   content: string;
+}
+
+export const formatDate = (str: string) => {
+  const date = new Date(str);
+  const formattedDate = date.toLocaleDateString('en-US', {month: 'short', day: '2-digit', year: 'numeric'});
+  return formattedDate
 }
