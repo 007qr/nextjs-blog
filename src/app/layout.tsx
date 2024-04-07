@@ -21,8 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={rubik.className}>
-        <div className="max-w-[1244px] mx-auto px-[36px] my-[36px]">
-          <div className="my-[36px]">
+        <div className="px-[36px] mb-[36px]">
+          <div className="h-[65px] items-center flex w-full">
             <Navbar />
           </div>
           {children}

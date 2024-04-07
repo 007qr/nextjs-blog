@@ -2,55 +2,81 @@
 import { CloudUpload, Loader2, UploadIcon, X } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
-import { slugify } from "~/lib/utils";
-import { db } from "../firebase";
-import { addDoc, collection } from 'firebase/firestore'
+import { Blog, slugify } from "~/lib/utils";
+import { db } from "../../firebase";
+import {nanoid} from 'nanoid';
+import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 
 import { useToast } from "~/components/ui/use-toast";
 import Image from "next/image";
-import { nanoid } from "nanoid";
 
 
 const Editor = dynamic(() => import("~/steven-tey-novel/advanced-editor"), { ssr: false });
 
-export default function AddBlog() {
+interface UpdateBlogParams {
+    params: {
+        id: string
+    }
+}
+
+export default function UpdateBlog({params}: UpdateBlogParams) {
+    const {id} = params;
+
     const { toast } = useToast();
     const router = useRouter();
+
+    const [loading, setLoading] = useState<boolean>(true);
     const [title, setTitle] = useState<string>("");
     const [shortDesc, setShortDesc] = useState<string>("");
     const [slug, setSlug] = useState<string>("");
+    const [content, setContent] = useState<string>('');
 
     const imgInputRef = useRef<HTMLInputElement>(null);
     const [uploading, setUploading] = useState<boolean>(false);
     const [imageURL, setImageURL] = useState<string>("");
     const storage = getStorage()
 
-    const addBlog = async () => {
+    const prePopulateFields = async () => {
+        const blogData =  (await getDoc(doc(db, "blogs", id))).data() as Blog;
+        setTitle(blogData.title);
+        setShortDesc(blogData.shortDesc);
+        setSlug(blogData.slug);
+        setImageURL(blogData.imageURL);
+        setContent(blogData.content);
+    }
+
+    useEffect(() => {
+        prePopulateFields().finally(() => {
+            setLoading(false);
+        })
+    }, []);
+
+    const updateBlog = async () => {
         if (title !== '' && window.localStorage.getItem("novel-content") != '' && imageURL != '' && shortDesc != '') {
-            console.log('clicked');
             try {
-                const docRef = await addDoc(collection(db, 'blogs'), {
+                const docRef = doc(db, 'blogs', id)
+                await updateDoc(docRef, {
                     title,
                     slug,
                     imageURL,
                     content: window.localStorage.getItem("novel-content"),
                     published: true,
                     shortDesc,
-                    createdAt: new Date()
                 })
                 toast({
-                    title: "Post created successfully!"
+                    title: "Post updated successfully!"
                 })
-                router.push(`/blog/${docRef.id}`);
+                router.push(`/blog/${id}`);
             } catch (e) {
+                console.log(e);
                 toast({
                     variant: "destructive",
-                    title: "Something went wrong while creating post."
+                    title: "Something went wrong while updating post."
                 })
             }
 
@@ -63,6 +89,7 @@ export default function AddBlog() {
     }
 
     const handleUploadImage = async (file: File): Promise<string> => {
+
         try {
             const storageRef = ref(storage, `cover-images/${file.name + nanoid()}`);
             const uploaded = await uploadBytes(storageRef, file);
@@ -96,12 +123,14 @@ export default function AddBlog() {
         }
     }
 
+    if (!loading) {
+
     return (
         <>
             <div className="max-w-[780px] mx-auto mt-[3.88em]">
                 <div className="flex justify-between">
-                    <h1 className="text-[35px] font-medium">Write and publish your Blog</h1>
-                    <Button className="flex gap-[8px] bg-green-600 hover:bg-green-600/90" onClick={addBlog}>
+                    <h1 className="text-[35px] font-medium">Update Blog</h1>
+                    <Button className="flex gap-[8px] bg-green-600 hover:bg-green-600/90" onClick={updateBlog}>
                         Publish <CloudUpload className="w-5 h-5" />
                     </Button>
                 </div>
@@ -152,10 +181,13 @@ export default function AddBlog() {
                         Content<span className="text-red-500">*</span>
                     </Label>
                     <div className="border min-h-[500px] p-[12px] rounded-md">
-                        <Editor editable={true}/>
+                        <Editor editable={true} defaultContent={JSON.parse(content || "{}")} />
                     </div>
                 </div>
             </div>
         </>
-    )
+    ) }
+    else {
+        return <p>Loading...</p>
+    }
 }

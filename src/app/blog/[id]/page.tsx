@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 import { db } from "../../firebase";
 import { collection, query, where, getDocs, documentId } from 'firebase/firestore'
 import { useEffect, useState } from "react";
-import { Blog } from "~/lib/utils";
+import { Blog, formatDate } from "~/lib/utils";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
@@ -15,7 +15,7 @@ interface BlogPageProps {
     }
 }
 
-export default function BlogPage({params}: BlogPageProps) {
+export default function BlogPage({ params }: BlogPageProps) {
     const [data, setData] = useState<Blog>();
     const [mounted, setMounted] = useState<boolean>(true);
 
@@ -39,21 +39,25 @@ export default function BlogPage({params}: BlogPageProps) {
         return (
             <>
                 {data ? (
-                    <div className="">
-                    <h1 className="text-[45px] font-semibold my-[12px] leading-[120%]">{data?.title}</h1>
-                    <div className="flex gap-[12px] items-center mb-[26px]">
-                        <Image src="/profile.jpg" alt="" width={70} height={70} className="rounded-full" />
-                        <div className="space-y-[4px]">
-                            <p className="text-[15px]">Ayush Patil</p>
-                            <p className="text-black/70 text-[13px]">Mar 30, 2024</p>
+                    <div className="max-w-[680px] mx-auto mt-[3.88em]">
+                        <h1 className="text-[42px] font-semibold leading-[52px] mb-[24px]">{data?.title}</h1>
+                        <div className="w-full border border-neutral-300 h-[0.5px]" />
+                        <div className="flex gap-[12px] items-center my-[16px]">
+                            <Image src="/profile.jpg" alt="" width={44} height={44} className="rounded-full" />
+                            <div className="space-y-[4px]">
+                                <p className="text-[15px]">Ayush Patil</p>
+                                <p className="text-black/70 text-[13px]">{formatDate(String(data.createdAt.toDate()))}</p>
+                            </div>
                         </div>
+                        <div className="w-full border border-neutral-300 h-[0.5px]" />
+                        <div className="h-[650px] relative my-[24px]">
+                            <Image src={data?.imageURL || ''} alt={`${data?.title}`} fill className="object-cover" />
+                        </div>
+
+
+                        <Editor editable={false} defaultContent={JSON.parse(data?.content)} />
                     </div>
-                    <div className="h-[650px] relative my-[24px]">
-                        <Image src={data?.imageURL || ''} alt={`${data?.title}`} fill className="object-cover" />
-                    </div>
-                    <Editor editable={true} defaultContent={JSON.parse(data?.content)}/>
-                </div>
-                ): <p>Loading...</p>}
+                ) : <p>Loading...</p>}
             </>
         )
     } else {

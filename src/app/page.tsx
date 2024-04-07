@@ -12,28 +12,28 @@ import {
 import {
   ContextMenu,
   ContextMenuContent,
-  ContextMenuItem,
+  ContextMenuItem,  
   ContextMenuShortcut,
   ContextMenuTrigger,
 } from "~/components/ui/context-menu"
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Blog } from "~/lib/utils";
 import { DeleteIcon, PencilIcon } from "lucide-react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-
+  const router = useRouter();
   const [blogs, setBlogs] = useState<Array<{ id: string; data: Blog; }>>();
 
-  useEffect(() => {
+  useMemo(() => {
     (async () => {
       let blogs = (await getDocs((collection(db, "blogs")))).docs.map((doc => { return { id: doc.id, data: doc.data() as Blog } }));
       blogs = blogs.filter((blog) => blog.data.published === true);
       setBlogs(blogs);
     })()
   }, []);
-
 
   const handleDeleteBlog = async (id:string)  => {
     const deletePromise = deleteDoc(doc(db, "blogs", id));
@@ -56,12 +56,12 @@ export default function Home() {
   }
 
   const handleUpdateBlog = (id: string) => {
-
+    router.push(`/update-blog/${id}`)
   }
 
   return (
     <>
-      <div className="my-[36px] grid lg:grid-cols-3 auto-rows-[1fr] gap-[24px] md:grid-cols-2 grid-cols-1 justify-items-center">
+      <div className="max-w-[1224px] mx-auto my-16 grid lg:grid-cols-3 auto-rows-[1fr] gap-[24px] md:grid-cols-2 grid-cols-1 justify-items-center">
 
         {
           blogs ? blogs.length? blogs.map((blog) => {
