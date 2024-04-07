@@ -15,12 +15,11 @@ import { useToast } from "~/components/ui/use-toast";
 import Image from "next/image";
 
 
-const Editor = dynamic(() => import("~/components/Editor"), { ssr: false });
+const Editor = dynamic(() => import("~/steven-tey-novel/advanced-editor"), { ssr: false });
 
 export default function AddBlog() {
     const { toast } = useToast();
     const router = useRouter();
-    const [data, setData] = useState<string>("");
     const [title, setTitle] = useState<string>("");
     const [shortDesc, setShortDesc] = useState<string>("");
     const [slug, setSlug] = useState<string>("");
@@ -28,21 +27,17 @@ export default function AddBlog() {
     const imgInputRef = useRef<HTMLInputElement>(null);
     const [uploading, setUploading] = useState<boolean>(false);
     const [imageURL, setImageURL] = useState<string>("");
-    const storage = getStorage();
-
-    const onChange = (value: string) => {
-        setData(value);
-    }
+    const storage = getStorage()
 
     const addBlog = async () => {
-        if (title !== '' && data != '' && imageURL != '' && shortDesc != '') {
+        if (title !== '' && window.localStorage.getItem("novel-content") != '' && imageURL != '' && shortDesc != '') {
             console.log('clicked');
             try {
-                await addDoc(collection(db, 'blogs'), {
+                const docRef = await addDoc(collection(db, 'blogs'), {
                     title,
                     slug,
                     imageURL,
-                    content: data,
+                    content: window.localStorage.getItem("novel-content"),
                     published: true,
                     shortDesc,
                     createdAt: new Date()
@@ -50,7 +45,7 @@ export default function AddBlog() {
                 toast({
                     title: "Post created successfully!"
                 })
-                router.push(`/blog/${slug}`);
+                router.push(`/blog/${docRef.id}`);
             } catch (e) {
                 toast({
                     variant: "destructive",
@@ -159,7 +154,7 @@ export default function AddBlog() {
                     Content<span className="text-red-500">*</span>
                 </Label>
                 <div className="border min-h-[500px] p-[12px] rounded-md">
-                    <Editor onChange={onChange} editable={true} />
+                    <Editor editable={true}/>
                 </div>
             </div>
         </>

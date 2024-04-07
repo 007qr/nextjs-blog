@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
 
-import { Toaster } from "~/components/ui/toaster"
+import { Toaster as SonnerToaster } from "sonner"
+import { Toaster } from "~/components/ui/toaster";
 import Navbar from "~/components/Navbar";
 
 const rubik = Rubik({ subsets: ["latin"] });
@@ -25,6 +26,7 @@ export default function RootLayout({
             <Navbar />
           </div>
           {children}
+          <SonnerToaster />
           <Toaster />
         </div>
       </body>
