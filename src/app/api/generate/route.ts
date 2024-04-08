@@ -9,6 +9,7 @@ import type { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 export const runtime = "edge";
 
 export async function POST(req: Request): Promise<Response> {
+  console.log("runneed!!!!!!!!!!!!");
   const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
     baseURL: process.env.OPENAI_BASE_URL || "https://api.openai.com/v1",

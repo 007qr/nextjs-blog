@@ -7,7 +7,7 @@ import { Blog, formatDate } from "~/lib/utils";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
-const Editor = dynamic(() => import("~/steven-tey-novel/advanced-editor"), { ssr: false });
+const Editor = dynamic(() => import("~/novel/advanced-editor"), { ssr: false });
 
 interface BlogPageProps {
     params: {
@@ -53,8 +53,6 @@ export default function BlogPage({ params }: BlogPageProps) {
                         <div className="h-[650px] relative my-[24px]">
                             <Image src={data?.imageURL || ''} alt={`${data?.title}`} fill className="object-cover" />
                         </div>
-
-
                         <Editor editable={false} defaultContent={JSON.parse(data?.content || "{}")} />
                     </div>
                 ) : <p>Loading...</p>}

@@ -16,7 +16,7 @@ import { useToast } from "~/components/ui/use-toast";
 import Image from "next/image";
 
 
-const Editor = dynamic(() => import("~/steven-tey-novel/advanced-editor"), { ssr: false });
+const Editor = dynamic(() => import("~/novel/advanced-editor"), { ssr: false });
 
 interface UpdateBlogParams {
     params: {

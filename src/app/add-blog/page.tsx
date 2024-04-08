@@ -14,9 +14,8 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { useToast } from "~/components/ui/use-toast";
 import Image from "next/image";
 import { nanoid } from "nanoid";
+import Editor from '~/novel/advanced-editor'
 
-
-const Editor = dynamic(() => import("~/steven-tey-novel/advanced-editor"), { ssr: false });
 
 export default function AddBlog() {
     const { toast } = useToast();

@@ -1,14 +1,17 @@
 ## Next.js Personal Blog
-This is an next.js personal blog website which uses latest `app` folder for routing.
+This is an Next.js personal blog website utilizing the latest `app` folder for routing, with `dynamic routing` for Firebase `Firestore` as its database and `Firebase Storage` for storing images. The site also leverages `Shadcn` as its component library and Next.js API routes for server-side logic.
 
 ## Features
-- AI Text Generation
-- Draft Blogs
+- Notion-style WYSIWYG editor
+- Editor includes slash commands
+- AI for ideation
+- Drafting Blogs
 - Search Functionality
 - Dark Mode
--
 
 ## Getting Started
+
+> Important you need to add `OPENAI_API_KEY` in .env to take advantage of ai features while writing an article
 
 First, run the development server:
 

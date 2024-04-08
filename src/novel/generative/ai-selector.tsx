@@ -1,6 +1,7 @@
 "use client";
 
 import { Command, CommandInput } from "../ui/command";
+
 import { useCompletion } from "ai/react";
 import { toast } from "sonner";
 import { useEditor } from "novel";
