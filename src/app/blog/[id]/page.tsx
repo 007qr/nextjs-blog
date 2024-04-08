@@ -55,7 +55,7 @@ export default function BlogPage({ params }: BlogPageProps) {
                         </div>
 
 
-                        <Editor editable={false} defaultContent={JSON.parse(data?.content)} />
+                        <Editor editable={false} defaultContent={JSON.parse(data?.content || "{}")} />
                     </div>
                 ) : <p>Loading...</p>}
             </>

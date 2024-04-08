@@ -4,7 +4,7 @@ import "./globals.css";
 
 import { Toaster as SonnerToaster } from "sonner"
 import { Toaster } from "~/components/ui/toaster";
-import Navbar from "~/components/Navbar";
+import Navbar from "~/components/navbar";
 
 const rubik = Rubik({ subsets: ["latin"] });
 

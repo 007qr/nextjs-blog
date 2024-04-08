@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import { db } from "./firebase";
-import { getDocs, collection, deleteDoc, doc, query, startAt, endAt, limit, orderBy } from 'firebase/firestore'
+import { db } from "../firebase";
+import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore'
 import {
   Card,
   CardContent,
@@ -12,7 +12,7 @@ import {
 import {
   ContextMenu,
   ContextMenuContent,
-  ContextMenuItem,
+  ContextMenuItem,  
   ContextMenuShortcut,
   ContextMenuTrigger,
 } from "~/components/ui/context-menu"
@@ -23,20 +23,19 @@ import { DeleteIcon, PencilIcon } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-export default function Home({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
+export default function Home() {
   const router = useRouter();
   const [blogs, setBlogs] = useState<Array<{ id: string; data: Blog; }>>();
-  
 
   useMemo(() => {
     (async () => {
-      let blogs = (await getDocs(query(collection(db, 'blogs')))).docs.map((doc => { return { id: doc.id, data: doc.data() as Blog } }));
-      blogs = blogs.filter((blog) => blog.data.published === true);
+      let blogs = (await getDocs((collection(db, "blogs")))).docs.map((doc => { return { id: doc.id, data: doc.data() as Blog } }));
+      blogs = blogs.filter((blog) => blog.data.published === false);
       setBlogs(blogs);
     })()
   }, []);
 
-  const handleDeleteBlog = async (id: string) => {
+  const handleDeleteBlog = async (id:string)  => {
     const deletePromise = deleteDoc(doc(db, "blogs", id));
     return new Promise((resolve) => {
       toast.promise(
@@ -65,15 +64,15 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
       <div className="max-w-[1224px] mx-auto my-16 grid lg:grid-cols-3 auto-rows-[1fr] gap-[24px] md:grid-cols-2 grid-cols-1 justify-items-center">
 
         {
-          blogs ? blogs.length ? blogs.map((blog) => {
+          blogs ? blogs.length? blogs.map((blog) => {
             return (
               <ContextMenu>
                 <ContextMenuTrigger>
-                  <Link href={`/blog/${blog.id}`} key={blog.id} className="h-full">
+                  <Link href={`/update-blog/${blog.id}`} key={blog.id} className="h-full">
                     <Card className="w-[350px] h-[450px]">
                       <CardContent className="p-6 pb-0">
                         <div className="relative w-full">
-                          <Image src={blog.data.imageURL} className="w-[350px] h-[200px] object-cover" width={350} height={100} alt='asd' />
+                          <Image src={blog.data.imageURL} className="w-[350px] h-[200px] object-cover" width={350} height={100} alt='cover-image' />
                         </div>
                       </CardContent>
                       <CardHeader>
@@ -84,7 +83,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
                   </Link>
                 </ContextMenuTrigger>
                 <ContextMenuContent className="w-64">
-                  <ContextMenuItem className="hover:[background-color:#6366f1!important] hover:[color:white!important]" onClick={() => handleUpdateBlog(blog.id)}>
+                <ContextMenuItem className="hover:[background-color:#6366f1!important] hover:[color:white!important]" onClick={() => handleUpdateBlog(blog.id)}>
                     Update
                     <ContextMenuShortcut>
                       <PencilIcon className="w-4 h-4" />
@@ -99,7 +98,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
                 </ContextMenuContent>
               </ContextMenu>
             )
-          }) : <p className="text-[17px]">You haven't published any blog yet (:</p> : <p className="text-[17px]">Loading...</p>
+          }):<p className="text-[17px]">Nothing in your drafts (:</p> : <p className="text-[17px]">Loading...</p>
         }
       </div>
     </>

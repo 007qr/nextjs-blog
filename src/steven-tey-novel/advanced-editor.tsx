@@ -27,8 +27,8 @@ import { defaultEditorContent } from "~/lib/content";
 
 const extensions = [...defaultExtensions, slashCommand];
 
-const TailwindAdvancedEditor = ({ editable, defaultContent }: { editable?: boolean, defaultContent?: JSONContent}) => {
-  const [initialContent, setInitialContent] = useState<JSONContent|null>(defaultContent||null);
+const TailwindAdvancedEditor = ({ editable, defaultContent }: { editable?: boolean, defaultContent?: JSONContent }) => {
+  const [initialContent, setInitialContent] = useState<JSONContent | null>(defaultContent || null);
   const [saveStatus, setSaveStatus] = useState("Saved");
 
   const [openNode, setOpenNode] = useState(false);
@@ -39,7 +39,6 @@ const TailwindAdvancedEditor = ({ editable, defaultContent }: { editable?: boole
   const debouncedUpdates = useDebouncedCallback(
     async (editor: EditorInstance) => {
       const json = editor.getJSON();
-
       window.localStorage.setItem("novel-content", JSON.stringify(json));
       setSaveStatus("Saved");
     },
@@ -48,7 +47,7 @@ const TailwindAdvancedEditor = ({ editable, defaultContent }: { editable?: boole
 
   useEffect(() => {
     const content = window.localStorage.getItem("novel-content")
-    if(content) setInitialContent(JSON.parse(content));
+    if (content) setInitialContent(JSON.parse(content));
     else setInitialContent(defaultEditorContent);
   }, []);
 
