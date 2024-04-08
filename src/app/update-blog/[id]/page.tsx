@@ -54,7 +54,7 @@ export default function UpdateBlog({ params }: UpdateBlogParams) {
         prePopulateFields().finally(() => {
             setLoading(false);
         })
-    }, []);
+    }, [prePopulateFields]);
 
     const updateBlog = async ({ draft }: { draft: boolean }) => {
         if (draft || (title !== '' && window.localStorage.getItem("novel-content") != '' && imageURL != '' && shortDesc != '')) {

@@ -66,9 +66,9 @@ export default function Home() {
         {
           blogs ? blogs.length? blogs.map((blog) => {
             return (
-              <ContextMenu>
+              <ContextMenu key={blog.id}>
                 <ContextMenuTrigger>
-                  <Link href={`/update-blog/${blog.id}`} key={blog.id} className="h-full">
+                  <Link href={`/update-blog/${blog.id}`}  className="h-full">
                     <Card className="w-[350px] h-[450px] dark:bg-secondary">
                       <CardContent className="p-6 pb-0">
                         <div className="relative w-full">

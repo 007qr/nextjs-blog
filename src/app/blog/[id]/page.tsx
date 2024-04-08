@@ -32,7 +32,7 @@ export default function BlogPage({ params }: BlogPageProps) {
 
             setData(docSnap.docs[0].data() as Blog);
         })()
-    }, []);
+    }, [params.id]);
 
 
     if (mounted) {

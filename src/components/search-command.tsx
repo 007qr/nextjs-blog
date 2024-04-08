@@ -32,7 +32,7 @@ export default function SearchCommand({ open, setOpen }: { open: boolean, setOpe
         return () => document.removeEventListener("keydown", down)
 
 
-    }, []);
+    }, [setOpen]);
 
     useEffect(() => {
         (async () => {

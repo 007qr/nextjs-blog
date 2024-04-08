@@ -67,9 +67,9 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
         {
           blogs ? blogs.length ? blogs.map((blog) => {
             return (
-              <ContextMenu>
+              <ContextMenu  key={blog.id} >
                 <ContextMenuTrigger>
-                  <Link href={`/blog/${blog.id}`} key={blog.id} className="h-full">
+                  <Link href={`/blog/${blog.id}`} className="h-full">
                     <Card className="w-[350px] h-[450px] dark:bg-secondary">
                       <CardContent className="p-6 pb-0">
                         <div className="relative w-full">
@@ -99,7 +99,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
                 </ContextMenuContent>
               </ContextMenu>
             )
-          }) : <p className="text-[17px]">You haven't published any blog yet (:</p> : <p className="text-[17px]">Loading...</p>
+          }) : <p className="text-[17px]">{`You haven\'t published any blog yet (:`}</p> : <p className="text-[17px]">Loading...</p>
         }
       </div>
     </>

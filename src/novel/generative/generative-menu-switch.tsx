@@ -20,7 +20,7 @@ const GenerativeMenuSwitch = ({
 
   useEffect(() => {
     if (!open) removeAIHighlight(editor);
-  }, [open]);
+  }, [open, editor]);
   return (
     <EditorBubble
       tippyOptions={{
