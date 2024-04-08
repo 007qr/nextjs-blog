@@ -69,7 +69,7 @@ export default function Home() {
               <ContextMenu>
                 <ContextMenuTrigger>
                   <Link href={`/update-blog/${blog.id}`} key={blog.id} className="h-full">
-                    <Card className="w-[350px] h-[450px]">
+                    <Card className="w-[350px] h-[450px] dark:bg-secondary">
                       <CardContent className="p-6 pb-0">
                         <div className="relative w-full">
                           <Image src={blog.data.imageURL} className="w-[350px] h-[200px] object-cover" width={350} height={100} alt='cover-image' />

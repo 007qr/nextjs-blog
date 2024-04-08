@@ -134,7 +134,7 @@ export default function UpdateBlog({ params }: UpdateBlogParams) {
                             <Button className="flex gap-[8px] h-8" onClick={() => { updateBlog({ draft: true }) }} size="sm" variant="outline">
                                 <CircleDashedIcon className="w-5 h-5" /> Save as Draft
                             </Button>
-                            <Button className="flex gap-[8px] h-8 bg-green-600 hover:bg-green-600/90" onClick={() => updateBlog({ draft: false })} size="sm">
+                            <Button className="flex gap-[8px] h-8 bg-green-500 hover:bg-green-500/90" onClick={() => updateBlog({ draft: false })} size="sm">
                                 <CloudUpload className="w-5 h-5" /> Publish
                             </Button>
                         </div>

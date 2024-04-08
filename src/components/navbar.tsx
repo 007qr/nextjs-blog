@@ -1,12 +1,21 @@
 "use client";
-import { CircleDashed, PenBox, PenLine } from "lucide-react";
+import { CircleDashed, Moon, PenBox, PenLine, Sun } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "~/components/ui/button";
 import SearchCommand from "./search-command";
-
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+  } from "~/components/ui/dropdown-menu"
+import { ThemeChanger } from "./theme-changer";
+  
 
 export default function Navbar() {
     const [open, setOpen] = useState<boolean>(false);
@@ -31,7 +40,7 @@ export default function Navbar() {
                             <span className="text-xs">⌘</span>K
                         </kbd>
                     </button>
-                    <SearchCommand open={open} setOpen={setOpen}/>
+                    <SearchCommand open={open} setOpen={setOpen} />
                     {path.includes('/blog/') ? (<>
                         <Link href={`/update-blog/${path.split("/")[2]}`}>
                             <Button variant="secondary" size="sm" className="flex gap-[8px] h-8">
@@ -39,17 +48,19 @@ export default function Navbar() {
                             </Button>
                         </Link>
                     </>) : <>
-                    <Link href="/add-blog">
-                        <Button variant="outline" size="sm" className="flex gap-[8px] h-8">
-                            <PenBox className="w-4 h-4" /> Write
-                        </Button>
-                    </Link>
-                    <Link href="/drafts">
-                        <Button variant="outline" size="sm" className="flex gap-[8px] h-8">
-                            <CircleDashed className="w-4 h-4" /> Drafts
-                        </Button>
-                    </Link>
+                        <Link href="/add-blog">
+                            <Button variant="outline" size="sm" className="flex gap-[8px] h-8">
+                                <PenBox className="w-4 h-4" /> Write
+                            </Button>
+                        </Link>
+                        <Link href="/drafts">
+                            <Button variant="outline" size="sm" className="flex gap-[8px] h-8">
+                                <CircleDashed className="w-4 h-4" /> Drafts
+                            </Button>
+                        </Link>
                     </>}
+                    <ThemeChanger />
+
 
                 </div>
             </div>

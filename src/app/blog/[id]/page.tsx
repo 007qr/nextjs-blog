@@ -46,7 +46,7 @@ export default function BlogPage({ params }: BlogPageProps) {
                             <Image src="/profile.jpg" alt="" width={44} height={44} className="rounded-full" />
                             <div className="space-y-[4px]">
                                 <p className="text-[15px]">Ayush Patil</p>
-                                <p className="text-black/70 text-[13px]">{formatDate(String(data.createdAt.toDate()))}</p>
+                                <p className="text-muted-foreground text-[13px]">{formatDate(String(data.createdAt.toDate()))}</p>
                             </div>
                         </div>
                         <div className="w-full border border-neutral-300 h-[0.5px]" />

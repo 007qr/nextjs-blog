@@ -53,7 +53,7 @@ export default function SearchCommand({ open, setOpen }: { open: boolean, setOpe
                             blogs ? blogs.length ?
                                 (
                                     blogs.map((blog) => (
-                                        <CommandItem key={blog.id} className="aria-selected:bg-black aria-selected:text-white" onSelect={() => { router.push(`/blog/${blog.id}`); setOpen(false) }} >
+                                        <CommandItem key={blog.id} className="aria-selected:bg-blue-500 aria-selected:text-white" onSelect={() => { router.push(`/blog/${blog.id}`); setOpen(false) }} >
                                             <span>{blog.data.title}</span>
                                         </CommandItem>
                                     ))

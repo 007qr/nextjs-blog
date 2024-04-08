@@ -105,7 +105,7 @@ export default function AddBlog() {
                         <Button className="flex gap-[8px] h-8" onClick={() => {addBlog({draft:true})}} size="sm" variant="outline">
                         <CircleDashedIcon className="w-5 h-5" /> Save as Draft 
                         </Button>
-                        <Button className="flex gap-[8px] h-8 bg-green-600 hover:bg-green-600/90" onClick={() => addBlog({draft:false})} size="sm">
+                        <Button className="dark:text-white flex gap-[8px] h-8 bg-green-500 hover:bg-green-500/90" onClick={() => addBlog({draft:false})} size="sm">
                         <CloudUpload className="w-5 h-5" /> Publish 
                         </Button>
                     </div>

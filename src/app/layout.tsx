@@ -1,3 +1,4 @@
+import { ThemeProvider } from "~/components/theme-provider"
 import type { Metadata } from "next";
 import { Rubik } from "next/font/google";
 import "./globals.css";
@@ -21,14 +22,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={rubik.className}>
-        <div className="px-[36px] mb-[36px]">
-          <div className="h-[65px] items-center flex w-full">
-            <Navbar />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="px-[36px] mb-[36px]">
+            <div className="h-[65px] items-center flex w-full">
+              <Navbar />
+            </div>
+            {children}
+            <SonnerToaster />
+            <Toaster />
           </div>
-          {children}
-          <SonnerToaster />
-          <Toaster />
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );
