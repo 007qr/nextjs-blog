@@ -20,13 +20,13 @@ import Editor from '~/novel/advanced-editor'
 export default function AddBlog() {
     const { toast } = useToast();
     const router = useRouter();
-    const [title, setTitle] = useState<string>("Beyond the Basics: Exploring the Frontiers of Neural Networks");
-    const [shortDesc, setShortDesc] = useState<string>("In the ever-evolving landscape of artificial intelligence, neural networks continue to stand at the forefront of innovation. While their fundamental principles remain steadfast, researchers and practitioners are constantly pushing the boundaries of what these powerful algorithms can achieve. Join me on a journey as we delve into the latest advancements and emerging trends shaping the future of neural networks.");
+    const [title, setTitle] = useState<string>("");
+    const [shortDesc, setShortDesc] = useState<string>("");
     const [slug, setSlug] = useState<string>("");
 
     const imgInputRef = useRef<HTMLInputElement>(null);
     const [uploading, setUploading] = useState<boolean>(false);
-    const [imageURL, setImageURL] = useState<string>("https://firebasestorage.googleapis.com/v0/b/nextjs-personal-blog.appspot.com/o/cover-images%2FNeural-Networks-Architecture.png0NxkV1nhQiORhqY51LuxY?alt=media&token=c4ec12aa-d0e4-4a5f-810b-426cf6825223");
+    const [imageURL, setImageURL] = useState<string>("");
     const storage = getStorage()
 
     const addBlog = async ({draft}:{draft:boolean}) => {
