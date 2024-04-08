@@ -1,6 +1,6 @@
 import { EditorBubble, useEditor } from "novel";
 import React, { Fragment, useEffect, type ReactNode } from "react";
-import { Button } from "../ui/button";
+import { Button } from "~/components/ui/button";
 import { AISelector } from "./ai-selector";
 import Magic from "../ui/icons/magic";
 import {} from "novel/plugins";

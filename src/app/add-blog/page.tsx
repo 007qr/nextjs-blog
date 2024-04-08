@@ -14,7 +14,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { useToast } from "~/components/ui/use-toast";
 import Image from "next/image";
 import { nanoid } from "nanoid";
-import Editor from '~/novel/advanced-editor'
+import Editor from '~/novel-editor/advanced-editor'
 
 
 export default function AddBlog() {

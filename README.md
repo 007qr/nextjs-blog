@@ -25,3 +25,10 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+
+## How to Update and Delete Blogs 
+
+You can right click on any blog on the homepage to update & delete blog.
+
+![alt text](public/image.png)

@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { db } from "./firebase";
-import { getDocs, collection, deleteDoc, doc, query, startAt, endAt, limit, orderBy } from 'firebase/firestore'
+import { getDocs, collection, deleteDoc, doc, query } from 'firebase/firestore'
 import {
   Card,
   CardContent,
@@ -23,7 +23,7 @@ import { DeleteIcon, PencilIcon } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-export default function Home({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
+export default function Home() {
   const router = useRouter();
   const [blogs, setBlogs] = useState<Array<{ id: string; data: Blog; }>>();
   

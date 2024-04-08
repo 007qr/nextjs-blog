@@ -1,5 +1,5 @@
 import React from "react";
-import { CommandGroup, CommandItem, CommandSeparator } from "../ui/command";
+import { CommandGroup, CommandItem, CommandSeparator } from "~/components/ui/command";
 import {
   ArrowDownWideNarrow,
   CheckCheck,

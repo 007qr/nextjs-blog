@@ -7,7 +7,7 @@ import { Blog, formatDate } from "~/lib/utils";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
-const Editor = dynamic(() => import("~/novel/advanced-editor"), { ssr: false });
+const Editor = dynamic(() => import("~/novel-editor/advanced-editor"), { ssr: false });
 
 interface BlogPageProps {
     params: {

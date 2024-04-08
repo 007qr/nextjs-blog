@@ -1,5 +1,5 @@
 import React from "react";
-import { CommandGroup, CommandItem, CommandSeparator } from "../ui/command";
+import { CommandGroup, CommandItem, CommandSeparator } from "~/components/ui/command";
 import { useEditor } from "novel";
 import { Check, TextQuote, TrashIcon } from "lucide-react";
 
@@ -19,7 +19,6 @@ const AICompletionCommands = ({
           value="replace"
           onSelect={() => {
             const selection = editor.view.state.selection;
-
             editor
               .chain()
               .focus()

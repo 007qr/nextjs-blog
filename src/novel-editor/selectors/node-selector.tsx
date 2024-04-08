@@ -18,7 +18,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "../ui/popover";
-import { Button } from "../ui/button";
+import { Button } from "~/components/ui/button";
 
 export type SelectorItem = {
   name: string;

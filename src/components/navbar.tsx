@@ -1,19 +1,11 @@
 "use client";
-import { CircleDashed, Moon, PenBox, PenLine, Sun } from "lucide-react";
+import { CircleDashed, PenBox, PenLine } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Button } from "~/components/ui/button";
 import SearchCommand from "./search-command";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-  } from "~/components/ui/dropdown-menu"
 import { ThemeChanger } from "./theme-changer";
   
 
