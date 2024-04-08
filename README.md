@@ -4,7 +4,6 @@ This is an Next.js personal blog website utilizing the latest `app` folder for r
 ## Features
 - Notion-style WYSIWYG editor
 - Editor includes slash commands
-- AI for ideation
 - Drafting Blogs
 - Search Functionality
 - Dark Mode
